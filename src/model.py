@@ -32,11 +32,13 @@ def get_trail_recommendations(trail_name, X, n=5):
     total = pd.concat((orig_row,rec_df))
     return total
 
+def assign_features(filename):
+    trail_id, max_grade, climb_desc = get_gpx_features(filename)
+    all_df.loc[all_df['id'] == trail_id, 'max_grade'] = max_grade
+    all_df.loc[all_df['id'] == trail_id, 'climb_desc'] = climb_desc
+
 
 if __name__ == "__main__":
-
-
-    
 
     # Denver
     denver_file = '../data/denver.json'
@@ -84,13 +86,8 @@ if __name__ == "__main__":
 
     all_df['max_grade'] = 0
     all_df['climb_desc'] = 0
+    # all_df['']
 
-
-    def assign_features(filename):
-        trail_id, max_grade, climb_desc = get_gpx_features(filename)
-        all_df.loc[all_df['id'] == trail_id, 'max_grade'] = max_grade
-        all_df.loc[all_df['id'] == trail_id, 'climb_desc'] = climb_desc
-    
     directory = "../data/GPX/all/"
     df_list = []
     for filename in os.listdir(directory):
@@ -100,15 +97,6 @@ if __name__ == "__main__":
             continue
         else:
             continue
-
-    cb_ids = set(crested_butte_df['id'])
-
-    mc_ids = set(marin_county_df['id'])
-    den_ids = set(denver_df['id'])
-    pc_ids = set(park_city_df['id'])
-    sed_ids = set(sedona_df['id'])
-    moab_ids = set(moab_df['id'])
-
 
     # print(all_df.head())
 
@@ -132,7 +120,6 @@ if __name__ == "__main__":
     # print(all_df['difficulty'].unique())
     # print(features.head())
 
-
     # print(all_df.head())
 
     all_df = all_df.reset_index(drop=True)
@@ -142,19 +129,11 @@ if __name__ == "__main__":
     ss = StandardScaler()
     X = ss.fit_transform(X)
     # print(X)
-    # print(all_df.info())
-
-
-        
+    # print(all_df.info())  
     # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
     print(get_trail_recommendations(3671983,X,n=5))
-
-
-
     # assign_features()
-
     print(all_df.describe())
-
     # print(all_df.loc[all_df['id'] == 7029147])
 
 
