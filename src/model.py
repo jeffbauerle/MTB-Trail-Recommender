@@ -86,7 +86,21 @@ if __name__ == "__main__":
 
     all_df['max_grade'] = 0
     all_df['climb_desc'] = 0
-    # all_df['']
+
+    def return_start(ascent, descent):
+        total = ascent+descent
+        limit = ascent*.3
+        # print(total)
+        # print(limit)
+        if abs(total) >= limit:
+            # return f'total:{total} limit: {limit}'
+            return 0
+        elif total < limit:
+            return 1
+        else:
+            return -1
+
+    all_df['return_start'] = all_df.apply(lambda row: return_start(row.ascent, row.descent), axis=1)
 
     directory = "../data/GPX/all/"
     df_list = []
@@ -97,6 +111,7 @@ if __name__ == "__main__":
             continue
         else:
             continue
+    # assign_features("../data/GPX/all/shadow-pine-loop.gpx")
 
     # print(all_df.head())
 
@@ -110,7 +125,7 @@ if __name__ == "__main__":
     all_df = all_df.drop(drop_list, axis=1)
 
 
-    keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low', 'max_grade', 'climb_desc']
+    keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low', 'max_grade', 'climb_desc', 'return_start']
     features = all_df[keep_list]
     all_df = all_df[all_df.type != 'Connector']
     all_df = all_df[all_df.difficulty != 'missing']
@@ -131,7 +146,8 @@ if __name__ == "__main__":
     # print(X)
     # print(all_df.info())  
     # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
-    print(get_trail_recommendations(3671983,X,n=5))
+    # print(get_trail_recommendations(3620449,X,n=5))
+    print(get_trail_recommendations(4670265,X,n=5))
     # assign_features()
     print(all_df.describe())
     # print(all_df.loc[all_df['id'] == 7029147])
