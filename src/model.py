@@ -83,53 +83,6 @@ if __name__ == "__main__":
                        denver_df, park_city_df, sedona_df, moab_df])
 
     all_df['max_grade'] = 0
-    cb_ids = set(crested_butte_df['id'])
-
-    mc_ids = set(marin_county_df['id'])
-    den_ids = set(denver_df['id'])
-    pc_ids = set(park_city_df['id'])
-    sed_ids = set(sedona_df['id'])
-    moab_ids = set(moab_df['id'])
-
-
-    print(all_df.head())
-
-    # (['id', 'name', 'type', 'summary', 'difficulty', 'stars', 'starVotes',
-    #    'location', 'url', 'imgSqSmall', 'imgSmall', 'imgSmallMed', 'imgMedium',
-    #    'length', 'ascent', 'descent', 'high', 'low', 'longitude', 'latitude',
-    #    'conditionStatus', 'conditionDetails', 'conditionDate'],
-    #   dtype='object')
-
-    drop_list = ['imgSqSmall', 'imgSmall', 'imgSmallMed', 'imgMedium', 'conditionStatus', 'conditionDetails', 'conditionDate']
-    all_df = all_df.drop(drop_list, axis=1)
-
-
-    keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low']
-    features = all_df[keep_list]
-    all_df = all_df[all_df.type != 'Connector']
-    all_df = all_df[all_df.difficulty != 'missing']
-    diff_colors = ['green', 'greenBlue', 'blue', 'blueBlack', 'black', 'dblack']
-    diff_vals = [1,2,3,4,5,6]
-    all_df['difficulty'] = all_df['difficulty'].replace(diff_colors, diff_vals)
-    print(all_df['difficulty'].unique())
-    print(features.head())
-
-
-    print(all_df.head())
-
-    all_df = all_df.reset_index(drop=True)
-
-    X = all_df[keep_list].values
-
-    ss = StandardScaler()
-    X = ss.fit_transform(X)
-    print(X)
-    print(all_df.info())
-
-
-        
-    # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
-    print(get_trail_recommendations(4670265,X,n=5))
 
 
     def assign_features(filename):
@@ -145,11 +98,62 @@ if __name__ == "__main__":
             continue
         else:
             continue
+
+    cb_ids = set(crested_butte_df['id'])
+
+    mc_ids = set(marin_county_df['id'])
+    den_ids = set(denver_df['id'])
+    pc_ids = set(park_city_df['id'])
+    sed_ids = set(sedona_df['id'])
+    moab_ids = set(moab_df['id'])
+
+
+    # print(all_df.head())
+
+    # (['id', 'name', 'type', 'summary', 'difficulty', 'stars', 'starVotes',
+    #    'location', 'url', 'imgSqSmall', 'imgSmall', 'imgSmallMed', 'imgMedium',
+    #    'length', 'ascent', 'descent', 'high', 'low', 'longitude', 'latitude',
+    #    'conditionStatus', 'conditionDetails', 'conditionDate'],
+    #   dtype='object')
+
+    drop_list = ['imgSqSmall', 'imgSmall', 'imgSmallMed', 'imgMedium', 'conditionStatus', 'conditionDetails', 'conditionDate']
+    all_df = all_df.drop(drop_list, axis=1)
+
+
+    keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low', 'max_grade']
+    features = all_df[keep_list]
+    all_df = all_df[all_df.type != 'Connector']
+    all_df = all_df[all_df.difficulty != 'missing']
+    diff_colors = ['green', 'greenBlue', 'blue', 'blueBlack', 'black', 'dblack']
+    diff_vals = [1,2,3,4,5,6]
+    all_df['difficulty'] = all_df['difficulty'].replace(diff_colors, diff_vals)
+    # print(all_df['difficulty'].unique())
+    # print(features.head())
+
+
+    # print(all_df.head())
+
+    all_df = all_df.reset_index(drop=True)
+
+    X = all_df[keep_list].values
+
+    ss = StandardScaler()
+    X = ss.fit_transform(X)
+    # print(X)
+    # print(all_df.info())
+
+
+        
+    # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
+    print(get_trail_recommendations(3620449,X,n=5))
+
+
+
     # assign_features()
 
-    print(all_df.describe())
+    # print(all_df.describe())
 
-    print(all_df.loc[all_df['id'] == 7029147])
+    # print(all_df.loc[all_df['id'] == 7029147])
 
 
 
