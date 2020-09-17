@@ -83,11 +83,13 @@ if __name__ == "__main__":
                        denver_df, park_city_df, sedona_df, moab_df])
 
     all_df['max_grade'] = 0
+    all_df['climb_desc'] = 0
 
 
     def assign_features(filename):
-        trail_id, max_grade = get_gpx_features(filename)
+        trail_id, max_grade, climb_desc = get_gpx_features(filename)
         all_df.loc[all_df['id'] == trail_id, 'max_grade'] = max_grade
+        all_df.loc[all_df['id'] == trail_id, 'climb_desc'] = climb_desc
     
     directory = "../data/GPX/all/"
     df_list = []
@@ -120,7 +122,7 @@ if __name__ == "__main__":
     all_df = all_df.drop(drop_list, axis=1)
 
 
-    keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low', 'max_grade']
+    keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low', 'max_grade', 'climb_desc']
     features = all_df[keep_list]
     all_df = all_df[all_df.type != 'Connector']
     all_df = all_df[all_df.difficulty != 'missing']
@@ -145,13 +147,13 @@ if __name__ == "__main__":
 
         
     # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
-    print(get_trail_recommendations(3620449,X,n=5))
+    print(get_trail_recommendations(3671983,X,n=5))
 
 
 
     # assign_features()
 
-    # print(all_df.describe())
+    print(all_df.describe())
 
     # print(all_df.loc[all_df['id'] == 7029147])
 
