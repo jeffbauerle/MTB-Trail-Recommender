@@ -79,19 +79,31 @@ def get_gpx_features(filename):
     # plt.show()
 
     df['Dist_Miles'] = df['Distance'] *0.62137119223
-    df['Elev_Rolling'] = df['Elevation_Ft'].rolling(60).mean()
+    df['Elev_Rolling'] = df['Elevation_Ft'].rolling(30).mean()
     df['Elev_Prev'] = df['Elev_Rolling'].shift(1)#fillna(0)
     # df['Elev_Prev'] = df['Elevation_Ft'].shift(1).fillna(0)
     df['Elev_Diff'] = df['Elev_Rolling'] - df['Elev_Prev']
+    df['Elev_Diff_Prev'] = df['Elev_Diff'].shift(1)
+    # df['Climb_Desc'] = df.apply(lambda row: 1 if (df['Elev_Diff_Prev'] > 0 & df['Elev_Diff'] < 0) else 0, axis=1) 
+    # filter = df[(df['Elev_Diff_Prev'] > 0) & (df['Elev_Diff'] < 0)]
+    # print(filter)
+
     # df['Elev_Diff'] = df['Elevation_Ft'] - df['Elev_Prev']
+    mask = (df['Elev_Diff_Prev'] > 0) & (df['Elev_Diff'] < 0)
+    # print(df[mask])
+    df['Climb_Desc'] = 0
+    df['Climb_Desc'].loc[mask] = 1
+    # print(df.loc[df['Track'] == 277])
+    climb_desc = df['Climb_Desc'].sum()
+    # df['Climb_Desc'] = df.where(mask, other=1)
     df.iloc[0, df.columns.get_loc('Elev_Diff')] = 0
     # df['Elev_Rolling'] = df['Elev_Diff'].rolling(40).mean()
 
-    # print(df.head())
+    # print(df.tail())
     # df['Descent'] 
     max_elev = df['Elevation_Ft'].max()
     sum_dist = df['Dist_Miles'].sum()
-    df['Elev_Diff'].plot()
+    # df['Elev_Diff'].plot()
     # plt.show()
 
     avg_dist = df['Dist_Miles'].mean()
@@ -117,6 +129,10 @@ def get_gpx_features(filename):
     # print(f'Average Grade: {round(avg_grade)}')
 
     # print(avg_distance.head())
-    return trail_id, max_grade
+    return trail_id, max_grade, climb_desc
 
-# print(get_gpx_features())
+
+if __name__ == "__main__":
+    filename = '../data/GPX/bangtail-divide-imba-epic.gpx'
+    print(get_gpx_features(filename))
+
