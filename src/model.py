@@ -6,6 +6,8 @@ import pickle
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 from sklearn.preprocessing import StandardScaler
 import warnings
+from gpx_process import get_gpx_features
+import os
 warnings.filterwarnings('ignore')
 
 
@@ -18,7 +20,23 @@ def load_trail_df_from_file(filename, location_name):
     return data_df
 
 
+def get_trail_recommendations(trail_name, X, n=5):
+    index = all_df.index[(all_df['id'] == trail_name)][0]
+    trail = X[index].reshape(1,-1)
+    cs = cosine_similarity(trail, X)
+    # cs = euclidean_distances(trail, X)
+    rec_index = np.argsort(cs)[0][::-1][1:]
+    ordered_df = all_df.loc[rec_index]
+    rec_df = ordered_df.head(n)
+    orig_row = all_df.loc[[index]].rename(lambda x: 'original')
+    total = pd.concat((orig_row,rec_df))
+    return total
+
+
 if __name__ == "__main__":
+
+
+    
 
     # Denver
     denver_file = '../data/denver.json'
@@ -64,7 +82,7 @@ if __name__ == "__main__":
     all_df = pd.concat([crested_butte_df, marin_county_df,
                        denver_df, park_city_df, sedona_df, moab_df])
 
-
+    all_df['max_grade'] = 0
     cb_ids = set(crested_butte_df['id'])
 
     mc_ids = set(marin_county_df['id'])
@@ -108,20 +126,30 @@ if __name__ == "__main__":
     print(X)
     print(all_df.info())
 
-    def get_trail_recommendations(trail_name, X, n=5):
-        index = all_df.index[(all_df['id'] == trail_name)][0]
-        trail = X[index].reshape(1,-1)
-        cs = cosine_similarity(trail, X)
-        # cs = euclidean_distances(trail, X)
-        rec_index = np.argsort(cs)[0][::-1][1:]
-        ordered_df = all_df.loc[rec_index]
-        rec_df = ordered_df.head(n)
-        orig_row = all_df.loc[[index]].rename(lambda x: 'original')
-        total = pd.concat((orig_row,rec_df))
-        return total
+
         
     # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
-    print(get_trail_recommendations(3620449,X,n=5))
+    print(get_trail_recommendations(4670265,X,n=5))
+
+
+    def assign_features(filename):
+        trail_id, max_grade = get_gpx_features(filename)
+        all_df.loc[all_df['id'] == trail_id, 'max_grade'] = max_grade
+    
+    directory = "../data/GPX/all/"
+    df_list = []
+    for filename in os.listdir(directory):
+        if filename.endswith(".gpx"):
+            print("../data/all/"+filename)
+            assign_features("../data/GPX/all/"+filename)
+            continue
+        else:
+            continue
+    # assign_features()
+
+    print(all_df.describe())
+
+    print(all_df.loc[all_df['id'] == 7029147])
 
 
 
