@@ -28,15 +28,15 @@ def get_distance(la1, lo1, la2, lo2):
     return distance
 
 
-def get_gpx_features():
+def get_gpx_features(filename):
 
     # Parsing an existing file:
     # -------------------------
 
     # gpx_file = open('../data/GPX/bangtail-divide-imba-epic.gpx', 'r')
     # gpx_file = open('../data/GPX/bangtail-divide-imba-epic.gpx', 'r')
-    gpx_file = open('../data/GPX/raggeds-shuttle.gpx', 'r')
-    # gpx_file = open('filename, 'r')
+    # gpx_file = open('../data/GPX/raggeds-shuttle.gpx', 'r')
+    gpx_file = open(filename, 'r')
     # gpx_file = open('../data/GPX/the-whole-enchilada.gpx', 'r')
     raw_text = gpx_file.read()
     regex_id = re.search(r'https://www.mtbproject.com/trail/(\d+)',raw_text)
@@ -46,7 +46,7 @@ def get_gpx_features():
     gpx_file.close()
     # print(raw_text)
     # gpx_file = open('../data/GPX/bangtail-divide-imba-epic.gpx', 'r')
-    gpx_file = open('../data/GPX/raggeds-shuttle.gpx', 'r')
+    gpx_file = open(filename, 'r')
     gpx = gpxpy.parse(gpx_file)
 
     gpx_file.close()
@@ -61,7 +61,10 @@ def get_gpx_features():
                     data.append([counter, point.latitude, point.longitude, point.elevation, 0, 0])
                 else:
                     distance = get_distance(la1, lo1, point.latitude, point.longitude)
-                    grade = (((point.elevation - elev1)/1000) / distance)*100
+                    try:
+                        grade = (((point.elevation - elev1)/1000) / distance)*100
+                    except ZeroDivisionError:
+                        grade = 0
                     data.append([counter, point.latitude, point.longitude, point.elevation, distance, grade])
 
                 counter += 1
