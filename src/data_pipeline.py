@@ -93,6 +93,18 @@ if __name__ == "__main__":
     all_df = pd.concat([crested_butte_df, marin_county_df,
                        denver_df, park_city_df, sedona_df, moab_df])
 
+
+    cb_ids = set(crested_butte_df['id'])
+
+    mc_ids = set(marin_county_df['id'])
+    den_ids = set(denver_df['id'])
+    pc_ids = set(park_city_df['id'])
+    sed_ids = set(sedona_df['id'])
+    moab_ids = set(moab_df['id'])
+
+    for val in crested_butte_df['id']:
+        print(f'mtbproject.com/trail/{val}')
+
     text = " ".join(review for review in all_df.summary)
     print("There are {} words in the combination of all review."
           .format(len(text)))
@@ -160,7 +172,7 @@ if __name__ == "__main__":
     ax.set_title('Mean Ascent Per Trail by Location')
     plt.tight_layout()
     # plt.savefig("../images/ascent_per_trail.png")
-    plt.show()
+    # plt.show()
 
     # Mean Length Per Trail Plot
     ax = make_ax_bar(loc_dict, "length")
@@ -170,10 +182,10 @@ if __name__ == "__main__":
     plt.xticks(rotation=45)
     plt.tight_layout()
     # plt.savefig("../images/length_per_trail.png")
-    plt.show()
+    # plt.show()
 
     all_df["ascent_per_trail"] = all_df["ascent"] / all_df["length"]
-    all_df["descent_per_trail"] = all_df["descent"] / all_df["length"]
+    all_df["descent_per_trail"] = abs(all_df["descent"] / all_df["length"])
 
     # print(all_df["ascent_per_trail"].mean())
 
@@ -185,7 +197,7 @@ if __name__ == "__main__":
     plt.xticks(rotation=45)
     plt.tight_layout()
     # plt.savefig("../images/ascent_per_mile.png")
-    plt.show()
+    # plt.show()
 
     # Mean Descent Per Trail by Location
     ax = make_ax_bar(loc_dict, "descent")
@@ -194,8 +206,8 @@ if __name__ == "__main__":
     ax.set_title('Mean Descent Per Trail by Location')
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig("../images/descent_per_trail.png")
-    plt.show()
+    # plt.savefig("../images/descent_per_trail.png")
+    # plt.show()
 
     # Mean Descent per Mile by Location
     ax = make_ax_bar(loc_dict, "descent_per_trail")
@@ -205,7 +217,7 @@ if __name__ == "__main__":
     plt.xticks(rotation=45)
     plt.tight_layout()
     # plt.savefig("../images/descent_per_mile.png")
-    plt.show()
+    # plt.show()
 
     # Difficulty
     # Ascent Per Mile by Difficulty
@@ -222,7 +234,7 @@ if __name__ == "__main__":
     plt.xticks(rotation=45)
     plt.tight_layout()
     # plt.savefig("../images/apm_by_difficulty.png")
-    plt.show()
+    # plt.show()
 
     # Descent Per Mile by Difficulty
     ax = make_ax_difficulty_bar(color_dict, "descent_per_trail")
@@ -233,12 +245,12 @@ if __name__ == "__main__":
            edgecolor="black")
 
     ax.set_xlabel('Difficulty')
-    ax.set_ylabel('Mean Descent Per Mile')
-    ax.set_title('Mean Descent Per Mile by Difficulty')
+    ax.set_ylabel('Descent/Mile (ft)')
+    ax.set_title('Mean Descent/Mile by Difficulty')
     plt.xticks(rotation=45)
     plt.tight_layout()
     # plt.savefig("../images/dpm_by_difficulty.png")
-    plt.show()
+    # plt.show()
 
     # Stars by Difficulty
     ax = make_ax_difficulty_bar(color_dict, "stars")
@@ -252,5 +264,9 @@ if __name__ == "__main__":
     ax.set_title('Mean Stars by Difficulty')
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig("../images/stars_by_difficulty.png")
-    plt.show()
+    # plt.savefig("../images/stars_by_difficulty.png")
+    # plt.show()
+
+    print(all_df.columns)
+
+

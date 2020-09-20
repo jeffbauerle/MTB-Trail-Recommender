@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 from gpx_process import get_gpx_features
 import os
+import matplotlib.pyplot as plt
 warnings.filterwarnings('ignore')
 
 
@@ -104,13 +105,15 @@ if __name__ == "__main__":
 
     directory = "../data/GPX/all/"
     df_list = []
-    for filename in os.listdir(directory):
-        if filename.endswith(".gpx"):
-            print("../data/all/"+filename)
-            assign_features("../data/GPX/all/"+filename)
-            continue
-        else:
-            continue
+
+    #Load in GPX files
+    # for filename in os.listdir(directory):
+    #     if filename.endswith(".gpx"):
+    #         print("../data/all/"+filename)
+    #         assign_features("../data/GPX/all/"+filename)
+    #         continue
+    #     else:
+    #         continue
     # assign_features("../data/GPX/all/shadow-pine-loop.gpx")
 
     # print(all_df.head())
@@ -129,6 +132,7 @@ if __name__ == "__main__":
     features = all_df[keep_list]
     all_df = all_df[all_df.type != 'Connector']
     all_df = all_df[all_df.difficulty != 'missing']
+    # all_df = all_df[all_df.type != 'Trail']
     diff_colors = ['green', 'greenBlue', 'blue', 'blueBlack', 'black', 'dblack']
     diff_vals = [1,2,3,4,5,6]
     all_df['difficulty'] = all_df['difficulty'].replace(diff_colors, diff_vals)
@@ -139,15 +143,35 @@ if __name__ == "__main__":
 
     all_df = all_df.reset_index(drop=True)
 
-    X = all_df[keep_list].values
+    # Feature making
+    # X = all_df[keep_list].values
 
-    ss = StandardScaler()
-    X = ss.fit_transform(X)
+    # ss = StandardScaler()
+    # X = ss.fit_transform(X)
+
+    # load the pickled model
+    with open('../data/X.pkl', 'rb') as f:
+        X = pickle.load(f)
+
+    # load the df
+    all_df = pd.read_pickle('../data/df.pkl')
+
+
+    # Pickle the features
+    # with open('../data/X.pkl', 'wb') as f:
+    #     pickle.dump(X, f)
+
+    # Pickle the df
+    # all_df.to_pickle('../data/df.pkl')
+
+    # plt.boxplot(all_df['length'])
+    # plt.show()
+
     # print(X)
     # print(all_df.info())  
     # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
     # print(get_trail_recommendations(3620449,X,n=5))
-    print(get_trail_recommendations(4670265,X,n=5))
+    print(get_trail_recommendations(703097,X,n=5))
     # assign_features()
     print(all_df.describe())
     # print(all_df.loc[all_df['id'] == 7029147])
