@@ -23,15 +23,16 @@ def load_trail_df_from_file(filename, location_name):
 
 def get_trail_recommendations(trail_name, X, n=5):
     index = all_df.index[(all_df['id'] == trail_name)][0]
-    trail = X[index].reshape(1,-1)
+    trail = X[index].reshape(1, -1)
     cs = cosine_similarity(trail, X)
     # cs = euclidean_distances(trail, X)
     rec_index = np.argsort(cs)[0][::-1][1:]
     ordered_df = all_df.loc[rec_index]
     rec_df = ordered_df.head(n)
     orig_row = all_df.loc[[index]].rename(lambda x: 'original')
-    total = pd.concat((orig_row,rec_df))
+    total = pd.concat((orig_row, rec_df))
     return total
+
 
 def assign_features(filename):
     trail_id, max_grade, climb_desc = get_gpx_features(filename)
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     directory = "../data/GPX/all/"
     df_list = []
 
-    #Load in GPX files
+    # Load in GPX files
     # for filename in os.listdir(directory):
     #     if filename.endswith(".gpx"):
     #         print("../data/all/"+filename)
@@ -116,17 +117,8 @@ if __name__ == "__main__":
     #         continue
     # assign_features("../data/GPX/all/shadow-pine-loop.gpx")
 
-    # print(all_df.head())
-
-    # (['id', 'name', 'type', 'summary', 'difficulty', 'stars', 'starVotes',
-    #    'location', 'url', 'imgSqSmall', 'imgSmall', 'imgSmallMed', 'imgMedium',
-    #    'length', 'ascent', 'descent', 'high', 'low', 'longitude', 'latitude',
-    #    'conditionStatus', 'conditionDetails', 'conditionDate'],
-    #   dtype='object')
-
     drop_list = ['imgSqSmall', 'imgSmall', 'imgSmallMed', 'imgMedium', 'conditionStatus', 'conditionDetails', 'conditionDate']
     all_df = all_df.drop(drop_list, axis=1)
-
 
     keep_list = ['length', 'difficulty', 'ascent', 'descent', 'high', 'low', 'max_grade', 'climb_desc', 'return_start']
     features = all_df[keep_list]
@@ -134,7 +126,7 @@ if __name__ == "__main__":
     all_df = all_df[all_df.difficulty != 'missing']
     # all_df = all_df[all_df.type != 'Trail']
     diff_colors = ['green', 'greenBlue', 'blue', 'blueBlack', 'black', 'dblack']
-    diff_vals = [1,2,3,4,5,6]
+    diff_vals = [1, 2, 3, 4, 5, 6]
     all_df['difficulty'] = all_df['difficulty'].replace(diff_colors, diff_vals)
     # print(all_df['difficulty'].unique())
     # print(features.head())
@@ -156,7 +148,6 @@ if __name__ == "__main__":
     # load the df
     all_df = pd.read_pickle('../data/df.pkl')
 
-
     # Pickle the features
     # with open('../data/X.pkl', 'wb') as f:
     #     pickle.dump(X, f)
@@ -167,20 +158,4 @@ if __name__ == "__main__":
     # plt.boxplot(all_df['length'])
     # plt.show()
 
-    # print(X)
-    # print(all_df.info())  
-    # print(get_trail_recommendations('The Whole Enchilada',X,n=5))
-    # print(get_trail_recommendations(3620449,X,n=5))
-    print(get_trail_recommendations(703097,X,n=5))
-    # assign_features()
-    print(all_df.describe())
-    # print(all_df.loc[all_df['id'] == 7029147])
-
-
-
-
-
-    
-
-
-    
+    print(get_trail_recommendations(703097, X, n=5))
