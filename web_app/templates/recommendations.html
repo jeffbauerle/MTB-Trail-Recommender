@@ -44,24 +44,24 @@ justify-content: center;
 <table class='table'>
   <thead class="thead-dark">
     <tr>        
-      <th scope="col">Name</th>  
-      <th scope="col">Difficulty</th>  
-      <th scope="col">Location</th>  
-      <th scope="col">Length</th>  
-      <th scope="col">Ascent</th>  
-      <th scope="col">Descent</th>  
-      <th scope="col">High</th>  
-      <th scope="col">Low</th>  
-      <th scope="col">Max Grade (%)</th>  
-      <th scope="col">Climb Descent</th>  
-      <th scope="col">Return Start</th>        
+      <th>Name</th>  
+      <th>Difficulty</th>  
+      <th>Location</th>  
+      <th>Length (mi)</th>  
+      <th>Ascent (ft)</th>  
+      <th>Descent (ft)</th>  
+      <th>High (ft)</th>  
+      <th>Low (ft)</th>  
+      <th>Max Grade (%)</th>  
+      <th>Climb Descent</th>  
+      <th>Return Start</th>        
     </tr>
   </thead>  
   <tbody>
     
     <tr>              
       <td><a href="{{original_trail.url}}">{{original_trail.name}}</a></td>
-      <td>{{original_trail.difficulty}}</td>
+      <td>{{original_trail.difficulty}} out of 6</td>
       <td>{{original_trail.location}}</td>
       <td>{{original_trail.length}}</td>
       <td>{{original_trail.ascent}}</td>
@@ -82,24 +82,24 @@ justify-content: center;
 <table class='table'>
   <thead class="thead-dark">
     <tr>        
-      <th scope="col">Name</th>  
-      <th scope="col">Difficulty</th>  
-      <th scope="col">Location</th>  
-      <th scope="col">Length</th>  
-      <th scope="col">Ascent</th>  
-      <th scope="col">Descent</th>  
-      <th scope="col">High</th>  
-      <th scope="col">Low</th>  
-      <th scope="col">Max Grade (%)</th>  
-      <th scope="col">Climb Descent</th>  
-      <th scope="col">Return Start</th>        
+      <th>Name</th>  
+      <th>Difficulty</th>  
+      <th>Location</th>  
+      <th>Length (mi)</th>  
+      <th>Ascent (ft)</th>  
+      <th>Descent (ft)</th>  
+      <th>High (ft)</th>  
+      <th>Low (ft)</th>  
+      <th>Max Grade (%)</th>  
+      <th>Climb Descent</th>  
+      <th>Return Start</th>        
     </tr>
   </thead>  
   <tbody>
     {% for trail in recommended_trails %}  
     <tr>              
       <td><a href="{{trail.url}}">{{trail.name}}</a></td>
-      <td>{{trail.difficulty}}</td>
+      <td>{{trail.difficulty}} out of 6</td>
       <td>{{trail.location}}</td>
       <td>{{trail.length}}</td>
       <td>{{trail.ascent}}</td>

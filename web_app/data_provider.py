@@ -2,20 +2,12 @@ import pandas as pd
 import numpy as np
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
-# load the pickled model
+
 with open('../data/X.pkl', 'rb') as f:
     X = pickle.load(f)
 
-# load the df
 all_df = pd.read_pickle('../data/df.pkl')
 
-# with open('../data/df.pkl','rb') as f:
-#     df = pickle.load(f)    
-    
-# with open('../data/mtn_df.pkl','rb') as f:
-#     mtn_df = pickle.load(f)
-    
- 
 def get_regions():    
     regions = {"denver": "Denver", "moab": "Moab","crested_butte": "Crested Butte", "marin_county": "Marin County", "sedona":"Sedona","park_city":"Park City"}
     return regions
