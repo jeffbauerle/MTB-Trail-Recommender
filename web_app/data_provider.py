@@ -28,13 +28,13 @@ def get_recommended_trails_by_trail(source_trail):
     return trails
 
 def get_recommended_trails_by_region_and_trail(dst_region, source_trail_id, n):
-    return get_trail_recommendations(source_trail_id, X, n)    
+    return get_trail_recommendations(source_trail_id, X, n, region_name=dst_region)    
 
-def get_trail_recommendations(trail_id, X, n=5, region="denver"):
+def get_trail_recommendations(trail_id, X, n=5, region_name=None):
     print(trail_id)
     print(X)
-    print(f' region is: {region}')
-    print(f' type of region is: {type(region)}')
+    print(region_name)
+    print(type(region_name))
     # for region in all_df['location'].unique():
     #     print(region)
     # region = input("Enter your region: ")
@@ -48,8 +48,8 @@ def get_trail_recommendations(trail_id, X, n=5, region="denver"):
     # cs = euclidean_distances(trail, X)
     rec_index = np.argsort(cs)[0][::-1][1:]
     ordered_df = all_df.loc[rec_index]
-    if region:
-        ordered_df = ordered_df[ordered_df['location'] == region]
+    if region_name:
+        ordered_df = ordered_df[ordered_df['location'] == region_name]
     rec_df = ordered_df.head(n)
     orig_row = all_df.loc[[index]].rename(lambda x: 'original')
     total = pd.concat((orig_row,rec_df))
