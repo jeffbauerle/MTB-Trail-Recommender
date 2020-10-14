@@ -1,5 +1,5 @@
-# Mountain Biking Trail EDA: 
-## What attributes are associated with highly rated trails?
+# Mountain Biking (MTB) Trail Recommender: 
+## Find Your New Favorite Trail
 
 ## Background
 
