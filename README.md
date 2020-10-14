@@ -3,7 +3,7 @@
 
 ## Motivation and Background
 
-I like to mountain bike. I enjoy looking at the "Best of" section of MTB Project's website to see what the most highly rated trails are, see if there's any new ones on the list, and target them for trips. Outside of that, I don't have a good process for finding new mountain biking trails. So the goal of this project is to come up with a better process for finding new MTB trails, based on trails that you like.
+I like to mountain bike. I enjoy looking at the "Top Rides" section of MTB Project's website to see what the most highly rated trails are, see if there's any new ones on the list, and target them for trips. Outside of that, I don't have a good process for finding new mountain biking trails. So the goal of this project is to come up with a better process for finding new MTB trails, based on trails that you like.
 
 ![alt text](https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/top_rated.png)
 
