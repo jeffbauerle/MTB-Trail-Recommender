@@ -61,7 +61,7 @@ Selected locations from this Singletracks.com list, plus local (Denver) and alle
 
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
 
-### Data Pipeline
+### Data Workflow
 
 I started with data from MTBProject’s API, associated the region from where I pulled it, scraped GPS data for each trail, and from it engineed the features max grade, climb then descend, and return to starting elevation.
 
