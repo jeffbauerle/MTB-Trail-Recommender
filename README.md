@@ -67,7 +67,12 @@ I started with data from MTBProject’s API, associated the region from where I 
 
 ## Exploratory Data Analysis
 
+The most interesting thing that struck me was the correlation between the difficulty and the mean descent per mile - green trails typically descend around 60 feet per mile, whereas double black trails descend on average over 300 ft per mile
+
 <img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(3).png">
+
+## Feature Engineering
+
 <img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(4).png">
 <img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(5).png">
 <img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(6).png">
