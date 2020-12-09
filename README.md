@@ -1,13 +1,15 @@
-# Mountain Biking Trail EDA: 
-## What attributes are associated with highly rated trails?
+# Mountain Biking (MTB) Trail Recommender: 
+## Find Your New Favorite Trail
 
-## Background
+## Motivation and Background
 
-I like to mountain bike. I enjoy looking at the "Best of" section of MTB Project's website to see what the most highly rated trails are, see if there's any new ones on the list, and target them for trips. I thought it would be interesting to see if there are any features about trails that leads them to be "highly rated", which get them on my radar. 
-
-If there were features about the trails that were associated with its star rating, I want to see if there are regional differences.
+I like to mountain bike. I enjoy looking at the "Top Rides" section of MTB Project's website to see what the most highly rated trails are, see if there's any new ones on the list, and target them for trips. Outside of that, I don't have a good process for finding new mountain biking trails. Therefore, the goal of this project is to come up with a better process for finding new MTB trails, based on trails that you like.
 
 ![alt text](https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/top_rated.png)
+
+## What is a content-based recommender?
+
+Recommends content based on other content you like  by evaluating the similarity of the content's attributes.
 
 
 ## Data
@@ -59,9 +61,9 @@ Selected locations from this Singletracks.com list, plus local (Denver) and alle
 
 [The Top 10 Best Mountain Bike Destinations in the USA](https://www.singletracks.com/mtb-trails/the-top-10-best-mountain-bike-destinations-in-the-usa/)
 
-### Data Pipeline
-Loaded JSON files into my Python script, converted and normalized dataframe. Added columns: ascent/mile, and descent/mile, recoded location and then concatenated the dataframes.
+### Data Workflow
 
+I started with data from MTBProject’s API, associated the region from where I pulled it, scraped GPS data for each trail, and from it engineed the features max grade, climb then descend, and return to starting elevation.
 
 ## Exploratory Data Analysis
 
