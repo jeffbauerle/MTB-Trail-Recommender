@@ -67,65 +67,14 @@ I started with data from MTBProject’s API, associated the region from where I 
 
 ## Exploratory Data Analysis
 
-<figure>
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/wordcloud_bike_after.png"
-    width="1000" height="500"/>
-    <figcaption>Wordcloud generated from 81198 words in the combination of all summaries.</figcaption>
-</figure>
-
-
-
-I started out by looking at the correlation of stars to all other features included, but no highly correlated features of interest were found:
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/stars_correlation.png">
-
-The only category of interest not included in this was difficulty, since it is a categorical value, however I found that all of the star ratings were uniformly distributed: 
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/stars_by_difficulty.png">
-
-I pivoted and started to look at regional differences in length and amount of ascent or descent on the trail. 
-
-
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/length_per_trail.png">
-
-Notice that in ascent Denver is near the top of the list:
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/ascent_per_trail.png">
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/descent_per_trail.png">
-
-Do Crested Butte and Denver have a steeper pitch or are they just longer? To explore this I added the descent per mile and ascent per mile columns to normalize the data.
-
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/descent_per_mile.png">
-
-I also thought it would be interesting to also group the ascent per mile and descent per mile by difficulty.
-
-With ascent per mile each difficulty level falls in line with the exception of the blue trails:
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/apm_by_difficulty.png">
-
-Descent Per Mile by Difficulty is where I found the most interesting relationship. As the difficulty increases, the mean descent per mile is increasingly more negative.
-
-<img src="https://raw.githubusercontent.com/jeffbauerle/MTB-Trail-EDA/master/images/dpm_by_difficulty.png">
-
-
-## Conclusions
-
-There weren't any features in my dataset highly associociated with star rating. People like most trails, rating them on average around 4 stars, regardless of difficulty type.
-
-Noticeable relationship between decent per mile and difficulty.
-
-
-## Further Work
-
-Perform a Z-test on the decent per mile by difficulty
-
-Also:
-Look at regional differences in the relationship of decent per mile and difficulty.
-
-Subset word frequency / wordcloud for higher ranked trails and lower ranked trails.
-
-Look into clustering of trails by difficulty.
-[Link to interactive map](https://jeff-den18-capstones.s3-us-west-2.amazonaws.com/crested_butte_locations2.html)
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(3).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(4).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(5).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(6).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(7).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(8).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(9).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(10).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(11).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(12).png">
+<img src="https://github.com/jeffbauerle/MTB-Trail-Recommender/blob/master/images/MTB%20Trail%20Recommender%20Presentation%20(13).png">
